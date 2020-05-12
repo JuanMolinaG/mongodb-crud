@@ -1,0 +1,278 @@
+openapi: 3.0.0
+
+info:
+  title: MongoDB CRUD
+  description: NodeJs API with a basic CRUD to MongoDB and user registration/authentication.
+  version: 1.0.0
+  
+servers: 
+  - url: http://localhost:3000
+    description: Local environment
+  
+paths:
+  /api/users/register:
+    post:
+      summary: "Allow users to register"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              example:
+                name: "John Doe"
+                email: "johndoe@fakeemail.com"
+                password: "myStrongPassword"
+      responses:
+        '200':
+          description: "Ok"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: string
+                    example: 5eb785a6c2a03b3b22d58124
+        '400':
+          description: "Bad request"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "\"name\" is required"
+                 
+  /api/users/login:
+    post:
+      summary: "Allow users to login"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              example:
+                email: "johndoe@fakeemail.com"
+                password: "myStrongPassword"
+      responses:
+        '200':
+          description: "Ok"
+          headers:
+            auth-token:
+              schema:
+                type: string
+                description: JWT token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token: 
+                    type: string
+                  type:
+                    type: string
+                example: 
+                  token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWI3MTg4ZGU4ZjlhNjY2ZGI5MTc2ZGMiLCJpYXQiOjE1ODkwNTk2NDh9.XJobdYE5DUe8OPi-gnV7hw5EThVPmEY_TJLleGYADBA"
+                  type: "Bearer"
+        '400':
+          description: "Bad request"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Email or Password wrong"
+                    
+  /api/posts:
+    post:
+      summary: "Allow users to create a post"
+      parameters: 
+        - in: header
+          name: auth-token
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+              example:
+                title: "My first article"
+                description: "The description of my first article"
+      responses:
+        '200':
+          description: "Ok"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/post'
+        '400':
+          description: "Bad request"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "\"title\" is required"
+        '401':
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Access denied"
+    get:
+      summary: "Allow users to get all posts"
+      responses:
+        '200':
+          description: "Ok"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/post'
+                    
+  /api/posts/:postId:
+    parameters:
+      - name: postId
+        in: path
+        required: true
+        description: "The id of the post"
+        schema:
+          type: string
+    get:
+      summary: "Allow users to get a post by id"
+      responses:
+        '200':
+          description: "Ok"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/post'
+        '404':
+          description: "Not found"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Post not found"
+    delete:
+      summary: "Allow users to delete a post by id"
+      parameters: 
+        - in: header
+          name: auth-token
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: "Ok"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: string
+                    example: "Post deleted"
+        '400':
+          description: "Bad request"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Does not exist a post with this id"
+        '401':
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Access denied"
+    put:
+      summary: "Allow users to update a post by id"
+      parameters: 
+        - in: header
+          name: auth-token
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: "Ok"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: string
+                    example: "Post updated"
+        '401':
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Access denied"
+                  
+components:
+  schemas:
+    post:
+      type: object
+      properties:
+        _id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        date:
+          type: string
+        __v:
+          type: integer
+      example:
+        _id: 5eb99ceaceea9912a7d857c8
+        title: "My first article"
+        description: "The description of my first article"
+        date: "2020-05-11T18:43:54.171Z"
+        __v: 0
