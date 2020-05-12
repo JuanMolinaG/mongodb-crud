@@ -27,7 +27,7 @@ Next create an environment variable called DB_CONNECT with the MongoDB connectio
 npm start
 ```
 
-After start the server go to http://your-domain/api/docs to see the API documentation
+After start the server go to http://your-domain/api/docs in the browser to see the API documentation
 
 ## Language and Tools
 
