@@ -48,7 +48,7 @@ After start the server go to http://your-domain/api/docs in the browser to see t
 
 ## Credits
 
-This is a learning proyect based on:
+This is a learning project based on:
 
 -   [Build A Restful Api With Node.js Express & MongoDB | Rest Api Tutorial](https://www.youtube.com/watch?v=vjf774RKrLc)
 -   [Build A Node.js API Authentication With JWT Tutorial](https://www.youtube.com/watch?v=2jqok-WgelI)
