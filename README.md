@@ -31,27 +31,27 @@ After start the server go to http://your-domain/api/docs in the browser to see t
 
 ## Language and Tools
 
--   [NodeJs](https://nodejs.org/)
--   [JWT](https://jwt.io/) - Auth web tokens
--   [MongoDB](https://www.mongodb.com/) - Database
--   [dotenv](https://www.npmjs.com/package/dotenv) - Environment variables
--   [bcrypt](https://www.npmjs.com/package/dotenv) - Passwords encrypt
--   [@hapi/joi](https://www.npmjs.com/package/@hapi/joi) - Data validation
--   [Express](https://expressjs.com/) - API routing
--   [Mongoose](https://mongoosejs.com/) - MongoDB ODM
--   [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express) - API documentation
+- [NodeJs](https://nodejs.org/)
+- [JWT](https://jwt.io/) - Auth web tokens
+- [MongoDB](https://www.mongodb.com/) - Database
+- [dotenv](https://www.npmjs.com/package/dotenv) - Environment variables
+- [bcrypt](https://www.npmjs.com/package/bcrypt) - Passwords encrypt
+- [@hapi/joi](https://www.npmjs.com/package/@hapi/joi) - Data validation
+- [Express](https://expressjs.com/) - API routing
+- [Mongoose](https://mongoosejs.com/) - MongoDB ODM
+- [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express) - API documentation
 
 ## Wish list
 
--   Implement unit testing
--   Deploy in functional server
+- Implement unit testing
+- Deploy in functional server
 
 ## Credits
 
 This is a learning project based on:
 
--   [Build A Restful Api With Node.js Express & MongoDB | Rest Api Tutorial](https://www.youtube.com/watch?v=vjf774RKrLc)
--   [Build A Node.js API Authentication With JWT Tutorial](https://www.youtube.com/watch?v=2jqok-WgelI)
+- [Build A Restful Api With Node.js Express & MongoDB | Rest Api Tutorial](https://www.youtube.com/watch?v=vjf774RKrLc)
+- [Build A Node.js API Authentication With JWT Tutorial](https://www.youtube.com/watch?v=2jqok-WgelI)
 
 ## License
 
